@@ -36,6 +36,7 @@ public class AuthFixture {
 
     @BeforeEach
     void authSetup(Page page, BrowserContext context) {
+        System.out.println("Запуск авторизации");
         page.navigate("https://app.kanbano.ru/login");
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).click();
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill(username);

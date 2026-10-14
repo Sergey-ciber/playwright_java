@@ -13,6 +13,7 @@ public class CanbanoMainPageTest extends CanbanoMainPageFixture {
 // Проверка видимости элементов главной страницы
     @Test
     void checkElementsMainPageVisible(Page page) {
+        System.out.println("Запуск теста проверки видимости элементов главной страницы");
         CanbanoMainPage mainPage = new CanbanoMainPage(page);
         for (CanbanoMainPageElement el : mainPage.getElements()) {
             assertThat(el.getElementLocator()).isVisible();
@@ -23,6 +24,7 @@ public class CanbanoMainPageTest extends CanbanoMainPageFixture {
     // Проверка текста элементов главной страницы
     @Test
     void checkElementsMainPageText(Page page) {
+        System.out.println("Запуск теста проверки текста элементов главной страницы");
         CanbanoMainPage mainPage = new CanbanoMainPage(page);
         for (CanbanoMainPageElement el : mainPage.getElements()) {
             assertThat(el.getElementLocator()).containsText(el.getText());
