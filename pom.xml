@@ -29,6 +29,11 @@
             <version>6.1.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.deque.html.axe-core</groupId>
+            <artifactId>playwright</artifactId>
+            <version>4.10.2</version> <!-- Актуальную версию можно проверить на Maven Central -->
+        </dependency>
     </dependencies>
 
 <build>
