@@ -2,3 +2,5 @@ trace.zip
 .idea/
 target/
 knowledge-base/
+/src/test/java/canbano/playwright/auth/
+/.env

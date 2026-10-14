@@ -34,6 +34,12 @@
             <artifactId>playwright</artifactId>
             <version>4.10.2</version> <!-- Актуальную версию можно проверить на Maven Central -->
         </dependency>
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 <build>
