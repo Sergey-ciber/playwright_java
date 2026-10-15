@@ -17,8 +17,8 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class AuthFixture {
 
     private static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
-    String username = dotenv.get("APP_USERNAME");
-    String password = dotenv.get("APP_PASSWORD");
+    String username = System.getenv("APP_USERNAME") != null ? System.getenv("APP_USERNAME") : dotenv.get("APP_USERNAME");
+    String password = System.getenv("APP_PASSWORD") != null ? System.getenv("APP_PASSWORD") : dotenv.get("APP_PASSWORD");
 
     // Штатный способ: JUnit-extension сам стартует трассировку до теста
     // и сохраняет trace.zip после его завершения.
@@ -28,7 +28,7 @@ public class AuthFixture {
             boolean isCi = System.getenv("CI") != null; // true в GitHub Actions
             return new Options()
                     .setHeadless(isCi) // в CI — headless, локально — headed
-                    .setLaunchOptions(new BrowserType.LaunchOptions().setSlowMo(500))
+                    .setLaunchOptions(new BrowserType.LaunchOptions().setSlowMo(1000))
                     .setTrace(Options.Trace.ON)                          // ON | RETAIN_ON_FAILURE | OFF
                     .setOutputDir(Paths.get("target", "test-results"));
         }

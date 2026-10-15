@@ -18,6 +18,14 @@ jobs:
         run: mvn -B install -D skipTests --no-transfer-progress
       - name: Ensure browsers are installed
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
+      - name: Create .env from secrets
+        run: |
+          echo "APP_USERNAME=${{ secrets.APP_USERNAME }}" > .env
+          echo "APP_PASSWORD=${{ secrets.APP_PASSWORD }}" > .env
+      - name: Authenticate (build storage state)
+        env:
+          CI: true
+        run: mvn test -Dtest=AuthSetup
       - name: Run tests
         env:
           CI: true

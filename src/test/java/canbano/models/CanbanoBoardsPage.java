@@ -4,6 +4,7 @@ import canbano.fixtures.CanbanoBoardsPageFixture;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,6 @@ public class CanbanoBoardsPage extends CanbanoBoardsPageFixture {
         }
         System.out.println("Найдены доски с названиями:");
         for (Locator card : boardCardsLocators) {
-            System.out.println(card.textContent());
             boardCardNames.add(card.textContent());
         }
         return boardCardNames;
@@ -64,6 +64,9 @@ public class CanbanoBoardsPage extends CanbanoBoardsPageFixture {
     public void deleteBoardByName(String name) {
         // 0. Переходим в список досок
         this.page.navigate("/boards");
+
+        //Ждем прогрузку всех ресурсов
+        this.page.waitForLoadState(LoadState.LOAD);
 
         // 1. Все карточки досок
         Locator boardCards = this.page.locator("#app > div > div.grow.overflow-y-hidden.sm\\:rounded-\\[24px\\] > div > div:nth-child(1) > div > div.h-full.w-full.overflow-y-auto.grow.px-\\[8px\\].sm\\:px-\\[16px\\].pb-\\[8px\\].sm\\:pb-\\[16px\\] > div:nth-child(1) > div > *");
@@ -94,6 +97,7 @@ public class CanbanoBoardsPage extends CanbanoBoardsPageFixture {
             confirmButton.click();
         }
 
+
         assertThat(page.locator("body > div.max-w-full.fixed.top-\\[12px\\].sm\\:top-\\[24px\\].left-1\\/2.-translate-x-1\\/2.flex.flex-col.gap-\\[12px\\].z-notification"))
                 .isVisible();
 
@@ -107,8 +111,11 @@ public class CanbanoBoardsPage extends CanbanoBoardsPageFixture {
     // Удаление всех созданных досок
     public void deleteAllBoards() {
         List<String> allBoardsName = getAllBoardsLocators();
+        System.out.println("Получен список досок: " + allBoardsName.toString());
+
         if (!allBoardsName.isEmpty()) {
             for (String name : allBoardsName) {
+                System.out.println("Удаляю доску - " + name);
                 deleteBoardByName(name);
             }
             System.out.println("Все доски удалены");
