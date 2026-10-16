@@ -37,9 +37,4 @@ public interface Configuration extends Config {
     @Key("trace.path")
     String tracePath();
 
-    @Key("APP_USERNAME")
-    String username();
-
-    @Key("APP_PASSWORD")
-    String password();
 }

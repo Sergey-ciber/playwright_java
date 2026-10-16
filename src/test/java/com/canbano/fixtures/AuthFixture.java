@@ -17,12 +17,10 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 @UsePlaywright(AuthFixture.TraceOptions.class)
 public class AuthFixture {
 
-//    private static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
-//    String username = System.getenv("APP_USERNAME") != null ? System.getenv("APP_USERNAME") : dotenv.get("APP_USERNAME");
-//    String password = System.getenv("APP_PASSWORD") != null ? System.getenv("APP_PASSWORD") : dotenv.get("APP_PASSWORD");
+    private static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+    String username = System.getenv("APP_USERNAME") != null ? System.getenv("APP_USERNAME") : dotenv.get("APP_USERNAME");
+    String password = System.getenv("APP_PASSWORD") != null ? System.getenv("APP_PASSWORD") : dotenv.get("APP_PASSWORD");
 
-    String username = config().username();
-    String password = config().password();
 
     // Штатный способ: JUnit-extension сам стартует трассировку до теста
     // и сохраняет trace.zip после его завершения.
