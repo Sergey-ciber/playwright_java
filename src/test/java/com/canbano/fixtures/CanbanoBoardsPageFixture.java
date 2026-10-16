@@ -1,4 +1,4 @@
-package canbano.fixtures;
+package com.canbano.fixtures;
 
 import com.microsoft.playwright.APIRequest;
 import com.microsoft.playwright.Browser;
@@ -13,39 +13,39 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.nio.file.Paths;
 
+import static com.canbano.config.ConfigurationManager.config;
+
 
 @UsePlaywright(CanbanoBoardsPageFixture.TraceOptions.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CanbanoBoardsPageFixture {
 
 
-
     // Штатный способ: JUnit-extension сам стартует трассировку до теста
     // и сохраняет trace.zip после его завершения.
     public static class TraceOptions implements OptionsFactory {
 
-        // Полчучение
-        private static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
-        String uiBaseUrl   = dotenv.get("UI_BASE_URL");
-        String apiBaseUrl = dotenv.get("API_BASE_URL");
+        // Получение URL из конфига
+        String uiBaseUrl = config().baseURL();
+        String apiBaseUrl = config().apiBaseURL();
 
         @Override
         public Options getOptions() {
             boolean isCi = System.getenv("CI") != null; // true в GitHub Actions
             return new Options()
                     .setHeadless(isCi) // в CI — headless, локально — headed
-                    .setLaunchOptions(new BrowserType.LaunchOptions().setSlowMo(isCi ? 0 : 0))
+                    .setLaunchOptions(new BrowserType.LaunchOptions().setSlowMo(isCi ? 50 : config().slowMotion()))
                     .setTrace(isCi ? Options.Trace.RETAIN_ON_FAILURE : Options.Trace.ON)                          // ON | RETAIN_ON_FAILURE | OFF
-                    .setOutputDir(Paths.get("target", "test-results"))
+                    .setOutputDir(Paths.get(config().tracePath()))
                     .setContextOptions(new Browser.NewContextOptions()
-                            .setStorageStatePath(Paths.get("playwright/.auth/user.json")))
+                            .setStorageStatePath(Paths.get(config().authPath())))
                     .setBaseUrl(uiBaseUrl)
                     .setApiRequestOptions(new APIRequest.NewContextOptions().setBaseURL(apiBaseUrl));
         }
     }
 
     @BeforeEach
-    void createContextAndPage (Page page) {
+    void createContextAndPage(Page page) {
         page.navigate("/boards");
     }
 }

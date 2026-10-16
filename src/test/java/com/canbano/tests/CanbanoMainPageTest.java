@@ -1,9 +1,8 @@
-package canbano.tests;
+package com.canbano.tests;
 
-import canbano.fixtures.CanbanoMainPageFixture;
-import canbano.models.CanbanoMainPage;
-import canbano.models.CanbanoMainPageElement;
-import com.microsoft.playwright.Locator;
+import com.canbano.fixtures.CanbanoMainPageFixture;
+import com.canbano.models.CanbanoMainPage;
+import com.canbano.models.CanbanoMainPageElement;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;

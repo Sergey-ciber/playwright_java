@@ -1,7 +1,7 @@
-package canbano.tests;
+package com.canbano.tests;
 
-import canbano.fixtures.CanbanoBoardsPageFixture;
-import canbano.models.CanbanoBoardsPage;
+import com.canbano.fixtures.CanbanoBoardsPageFixture;
+import com.canbano.models.CanbanoBoardsPage;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.Disabled;

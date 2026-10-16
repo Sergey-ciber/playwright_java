@@ -1,4 +1,4 @@
-package canbano.models;
+package com.canbano.models;
 
 public class Board {
     int id;

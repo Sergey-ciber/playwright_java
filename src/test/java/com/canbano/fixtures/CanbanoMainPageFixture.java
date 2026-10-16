@@ -1,4 +1,4 @@
-package canbano.fixtures;
+package com.canbano.fixtures;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.junit.Options;

@@ -1,4 +1,4 @@
-package canbano.models;
+package com.canbano.models;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
