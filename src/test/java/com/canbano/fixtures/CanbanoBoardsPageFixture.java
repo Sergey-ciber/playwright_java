@@ -26,7 +26,7 @@ public class CanbanoBoardsPageFixture {
     public static class TraceOptions implements OptionsFactory {
 
         // Получение URL из конфига
-        String uiBaseUrl = config().baseURL();
+        String uiBaseUrl = config().uiBaseURL();
         String apiBaseUrl = config().apiBaseURL();
 
         @Override

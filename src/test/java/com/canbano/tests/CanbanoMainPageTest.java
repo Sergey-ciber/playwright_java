@@ -5,9 +5,13 @@ import com.canbano.models.CanbanoMainPage;
 import com.canbano.models.CanbanoMainPageElement;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.Test;
+
+import static com.canbano.utils.APIToken.getTokenFromAuth;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class CanbanoMainPageTest extends CanbanoMainPageFixture {
+
+
 
 // Проверка видимости элементов главной страницы
     @Test

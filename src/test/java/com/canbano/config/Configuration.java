@@ -11,8 +11,8 @@ public interface Configuration extends Config {
     @Key("allure.results.directory")
     String allureResultDir();
 
-    @Key("base.url")
-    String baseURL();
+    @Key("ui.base.url")
+    String uiBaseURL();
 
     @Key("api.base.url")
     String apiBaseURL();
@@ -20,6 +20,7 @@ public interface Configuration extends Config {
     @Key("base.test.video.path")
     String baseTestVideoPath();
 
+    @Key("browser")
     String browser();
 
     boolean headless();
@@ -37,4 +38,18 @@ public interface Configuration extends Config {
     @Key("trace.path")
     String tracePath();
 
+    @Key("video.path")
+    String videoPath();
+
+    @Key("screenshots.path")
+    String screenshotsPath();
+
+    @Key("out.dir.path")
+    String outDirPath();
+
+    @Key("switch.trace")
+    String switchTrace();
+
+    @Key("auth.page.url")
+    String authPageURL();
 }
