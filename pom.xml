@@ -102,7 +102,7 @@
                 <arguments>
                     <argument>codegen</argument>
                     <!-- Здесь можно указать любой URL по умолчанию -->
-                    <argument>https://kanbano.ru</argument>
+                    <argument>http://localhost:5173</argument>
                 </arguments>
             </configuration>
         </plugin>

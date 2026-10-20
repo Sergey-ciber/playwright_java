@@ -25,12 +25,8 @@ jobs:
       - name: Authenticate (build storage state)
         env:
           CI: true
-        run: mvn test -Dtest=AuthSetup
+        run: mvn test -Dtest=AuthSetupMyTest
       - name: Run tests
         env:
           CI: true
-          UI_BASE_URL: https://app.kanbano.ru
-          API_BASE_URL: https://app.kanbano.ru/api
-          APP_USERNAME: ${{ secrets.APP_USERNAME }}
-          APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
         run: mvn test
