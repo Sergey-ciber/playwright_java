@@ -45,7 +45,7 @@ public class PlayWrightOptions {
         }
     }
 
-    // UI без авторизации (исправлено: убран storageState)
+    // UI без авторизации
     public static class UIWithoutAuth extends BaseOptions {
         @Override
         public Options getOptions() {
@@ -54,7 +54,7 @@ public class PlayWrightOptions {
         }
     }
 
-    // API с авторизацией (исправлено: используем APIRequest.NewContextOptions)
+    // API с авторизацией
     public static class ApiWithAuth extends BaseOptions {
         @Override
         public Options getOptions() {
@@ -71,7 +71,7 @@ public class PlayWrightOptions {
         }
     }
 
-    // API без авторизации (исправлено: используем APIRequest.NewContextOptions)
+    // API без авторизации
     public static class ApiWithoutAuth extends BaseOptions {
         @Override
         public Options getOptions() {

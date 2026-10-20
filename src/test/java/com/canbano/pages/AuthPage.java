@@ -1,13 +1,16 @@
 package com.canbano.pages;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.junit.UsePlaywright;
 import com.microsoft.playwright.options.AriaRole;
 import io.github.cdimascio.dotenv.Dotenv;
+import io.qameta.allure.Step;
+
 
 import java.awt.*;
+import java.nio.file.Paths;
 
 import static com.canbano.config.ConfigurationManager.config;
+import static com.canbano.config.ConfigurationManager.getEnv;
 
 
 public class AuthPage {
@@ -20,27 +23,63 @@ public class AuthPage {
     private final Locator inputLogin;
     private final Locator inputPassword;
     private final Locator sendFormButton;
-
+    private final Locator profileIcon;
 
 
     public AuthPage(Page page) {
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
         this.page = page;
-        this.username = System.getenv("APP_USERNAME") != null ? System.getenv("APP_USERNAME") : dotenv.get("APP_USERNAME");;
-        this.password = System.getenv("APP_PASSWORD") != null ? System.getenv("APP_PASSWORD") : dotenv.get("APP_PASSWORD");;
+        this.username = getEnv("APP_USERNAME");
+        this.password = getEnv("APP_PASSWORD");
         this.authPageURL = config().authPageURL();
-        this.authFormLocator = this.page.getByText("ВходВойдите в свой аккаунт для продолженияEmail");
-        this.inputLogin = this.page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email"));
+        this.authFormLocator = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Вход"));
+        this.inputLogin = this.page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Логин"));
         this.inputPassword = this.page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Пароль"));
-        this.sendFormButton =this.page.locator("[data-test=\"submit-button\"]");
+        this.sendFormButton = this.page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Войти"));
+        this.profileIcon = this.page.locator("#root > div > header > div > a");
     }
 
 
+    @Step("Переход на страницу авторизации")
+    public AuthPage openAuthPage() {
+        page.navigate(authPageURL);
+        return this;
+    }
 
+    @Step("Ввод логина")
+    public AuthPage fillLogin(String login) {
+        inputLogin.click();
+        inputLogin.fill(login);
+        return this;
+    }
 
+    @Step("Ввод пароля")
+    public AuthPage fillPassword(String password) {
+        inputPassword.click();
+        inputPassword.fill(password);
+        return this;
+    }
 
+    @Step("Нажатие кнопки Войти")
+    public AuthPage clickSubmitButton() {
+        sendFormButton.click();
+        return this;
+    }
 
-    public static void auth() {
+    @Step("Сохраняем данные авторизации в playwright/.auth/user.json")
+    public AuthPage saveAuthState() {
+        page.context().storageState(new BrowserContext.StorageStateOptions()
+                .setPath(Paths.get(config().authPath())));
+        return this;
+    }
 
+    @Step("Получаем локатор формы авторизации")
+    public Locator getAuthFormLocator() {
+        return authFormLocator;
+    }
+
+    @Step("Получаем локатор иконки профиля")
+    public Locator getProfileIcon() {
+        return profileIcon;
     }
 }

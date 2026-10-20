@@ -52,4 +52,7 @@ public interface Configuration extends Config {
 
     @Key("auth.page.url")
     String authPageURL();
+
+    @Key("boards.page.url")
+    String boardsPageURL();
 }
