@@ -105,9 +105,8 @@ public class MyBoardsPageTest {
         assertThat(boardsPage.getBoardByName(newBoardName)).isVisible();
 
         boardsPage.deleteBoardByName(newBoardName);
-
     }
 
-
+    // test
 
 }
