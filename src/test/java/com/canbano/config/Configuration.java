@@ -17,6 +17,13 @@ public interface Configuration extends Config {
     @Key("api.base.url")
     String apiBaseURL();
 
+    @Key("web.ui.base.url")
+    String webUiBaseURL();
+
+    @Key("web.api.base.url")
+    String webApiBaseURL();
+
+
     @Key("base.test.video.path")
     String baseTestVideoPath();
 

@@ -39,7 +39,7 @@ public class PlayWrightOptions {
         @Override
         public Options getOptions() {
             return commonOptions()
-                    .setBaseUrl(config().uiBaseURL())
+                    .setBaseUrl(isCi ? config().webUiBaseURL() : config().uiBaseURL())
                     .setContextOptions(new Browser.NewContextOptions()
                             .setStorageStatePath(Path.of(config().authPath())));
         }
@@ -50,33 +50,7 @@ public class PlayWrightOptions {
         @Override
         public Options getOptions() {
             return commonOptions()
-                    .setBaseUrl(config().uiBaseURL());
-        }
-    }
-
-    // API с авторизацией
-    public static class ApiWithAuth extends BaseOptions {
-        @Override
-        public Options getOptions() {
-
-            String apiToken = APIToken.getTokenFromAuth();
-
-            return commonOptions()
-                    .setBaseUrl(config().apiBaseURL())
-                    .setApiRequestOptions(new APIRequest.NewContextOptions()
-                            // Для API авторизация обычно задается через заголовки
-                            .setExtraHTTPHeaders(java.util.Map.of(
-                                    "Authorization", "Bearer " + apiToken // Пример
-                            )));
-        }
-    }
-
-    // API без авторизации
-    public static class ApiWithoutAuth extends BaseOptions {
-        @Override
-        public Options getOptions() {
-            return commonOptions()
-                    .setBaseUrl(config().apiBaseURL());
+                    .setBaseUrl(isCi ? config().webUiBaseURL() : config().uiBaseURL());
         }
     }
 }

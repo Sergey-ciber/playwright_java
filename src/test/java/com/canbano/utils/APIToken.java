@@ -14,19 +14,20 @@ public class APIToken {
     static String autPath = config().authPath();
 
     public static String getTokenFromAuth() {
-
         try {
             JsonNode root = new ObjectMapper().readTree(new File(autPath));
-            JsonNode cookies = root.get("cookies");
-            String token = "";
-            for (JsonNode cookie : cookies) {
-                if (cookie.get("name").asText().equals("access_token")) {
-                    token = cookie.get("value").asText();
-                    break;
+
+            // Ищем токен в localStorage по всем origin
+            for (JsonNode origin : root.get("origins")) {
+                for (JsonNode item : origin.get("localStorage")) {
+                    if ("token".equals(item.get("name").asText())) {
+                        String token = item.get("value").asText();
+                        System.out.println("Токен: " + token);
+                        return token;
+                    }
                 }
             }
-            System.out.println("Токен: " + token);
-            return token;
+            return "";
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
