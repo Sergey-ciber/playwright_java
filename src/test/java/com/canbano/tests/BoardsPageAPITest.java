@@ -42,7 +42,7 @@ public class BoardsPageAPITest {
                 .build();
 
         APIRequestContext requestContext = ApiContextFactory.withAuth(playwright);
-        APIResponse response = requestContext.post("http://localhost:5173/api/boards",
+        APIResponse response = requestContext.post(config().boardsPageURL(),
                 RequestOptions.create().setData(newBoard));   // baseURL уже задан
         System.out.println("Status Code: " + response.status());
         System.out.println("Response Body: " + response.text());
@@ -83,7 +83,7 @@ public class BoardsPageAPITest {
                 .build();
 
         APIRequestContext requestContext = ApiContextFactory.withoutAuth(playwright);
-        APIResponse response = requestContext.post("http://localhost:5173/api/boards",
+        APIResponse response = requestContext.post(config().boardsPageURL(),
                 RequestOptions.create().setData(newBoard));   // baseURL уже задан
         System.out.println("Status Code: " + response.status());
         System.out.println("Response Body: " + response.text());

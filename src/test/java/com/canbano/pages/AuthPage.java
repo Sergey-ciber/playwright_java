@@ -36,12 +36,13 @@ public class AuthPage {
         this.inputLogin = this.page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Логин"));
         this.inputPassword = this.page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Пароль"));
         this.sendFormButton = this.page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Войти"));
-        this.profileIcon = this.page.locator("#root > div > header > div > a");
+        this.profileIcon = this.page.locator("#root > div > header > div.navbar-user > a");
     }
 
 
     @Step("Переход на страницу авторизации")
     public AuthPage openAuthPage() {
+        System.out.println("URL для авторизации - ");
         page.navigate(authPageURL);
         return this;
     }

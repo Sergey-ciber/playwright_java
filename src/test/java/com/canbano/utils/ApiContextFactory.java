@@ -18,7 +18,7 @@ public final class ApiContextFactory {
     public static APIRequestContext withAuth(Playwright playwright) {
         boolean isCi = System.getenv("CI") != null; // true в GitHub Actions
         System.out.println("Запуск на Гитхаб - " + isCi);
-        System.out.println(config().uiBaseURL());
+        System.out.println(config().webApiBaseURL());
         System.out.println(config().webUiBaseURL());
         return playwright.request().newContext(new APIRequest.NewContextOptions()
                 .setBaseURL(isCi ? config().webApiBaseURL() : config().apiBaseURL())
