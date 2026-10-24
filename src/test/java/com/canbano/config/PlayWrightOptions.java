@@ -29,6 +29,7 @@ public class PlayWrightOptions {
                     .setHeadless(isCi)
                     .setOutputDir(outDirPath)
                     .setLaunchOptions(new BrowserType.LaunchOptions()
+                            .setTimeout(config().timeout())
                             .setTracesDir(traceDirPath)
                             .setSlowMo(isCi ? 50 : slowMotion));
         }
