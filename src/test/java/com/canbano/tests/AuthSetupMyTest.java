@@ -11,7 +11,7 @@ import static com.canbano.config.ConfigurationManager.getEnv;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @UsePlaywright(PlayWrightOptions.UIWithoutAuth.class)
-public class AuthSetupMyTest {
+public class AuthSetupMyTest extends BaseTest{
 
     private final String username = getEnv("APP_USERNAME");
     private final String password = getEnv("APP_PASSWORD");

@@ -22,8 +22,6 @@ jobs:
         run: |
           echo "APP_USERNAME=${{ secrets.APP_USERNAME }}" > .env
           echo "APP_PASSWORD=${{ secrets.APP_PASSWORD }}" >> .env
-      - name: Check remote app
-        run: curl -I --connect-timeout 10 http://2.27.33.116/login || true
       - name: Authenticate (build storage state)
         env:
           CI: true
