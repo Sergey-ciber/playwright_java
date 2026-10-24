@@ -28,6 +28,13 @@ public class AuthSetupMyTest {
         authPage.fillLogin(username)
                 .fillPassword(password)
                 .clickSubmitButton();
+        // Отладка
+        page.waitForTimeout(2000);
+        System.out.println("Current URL: " + page.url());
+        System.out.println("Title: " + page.title());
+        System.out.println("Body contains 'Войти': " + page.content().contains("Войти"));
+        System.out.println("Profile visible: " + authPage.getProfileIcon().isVisible());
+
         assertThat(authPage.getProfileIcon()).isVisible();
         authPage.saveAuthState();
     }
