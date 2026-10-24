@@ -17,9 +17,11 @@ public final class ApiContextFactory {
     // API с авторизацией
     public static APIRequestContext withAuth(Playwright playwright) {
         boolean isCi = System.getenv("CI") != null; // true в GitHub Actions
-        System.out.println(config().apiBaseURL());
+        System.out.println("Запуск на Гитхаб - " + isCi);
+        System.out.println(config().uiBaseURL());
+        System.out.println(config().webUiBaseURL());
         return playwright.request().newContext(new APIRequest.NewContextOptions()
-                .setBaseURL(isCi ? config().webUiBaseURL() : config().uiBaseURL())
+                .setBaseURL(isCi ? config().webApiBaseURL() : config().apiBaseURL())
                 .setExtraHTTPHeaders(Map.of(
                         "Authorization", "Bearer " + APIToken.getTokenFromAuth(),
                         "Accept", "application/json")));
@@ -29,7 +31,7 @@ public final class ApiContextFactory {
     public static APIRequestContext withoutAuth(Playwright playwright) {
         boolean isCi = System.getenv("CI") != null; // true в GitHub Actions
         return playwright.request().newContext(new APIRequest.NewContextOptions()
-                .setBaseURL(isCi ? config().webUiBaseURL() : config().uiBaseURL())
+                .setBaseURL(isCi ? config().webApiBaseURL() : config().apiBaseURL())
                 .setExtraHTTPHeaders(Map.of("Accept", "application/json")));
     }
 }
