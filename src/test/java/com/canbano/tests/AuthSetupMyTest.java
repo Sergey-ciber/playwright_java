@@ -34,6 +34,9 @@ public class AuthSetupMyTest extends BaseTest{
         System.out.println("Title: " + page.title());
         System.out.println("Body contains 'Войти': " + page.content().contains("Войти"));
         System.out.println("Profile visible: " + authPage.getProfileIcon().isVisible());
+        System.out.println(username);
+        System.out.println(password);
+
 
         assertThat(authPage.getProfileIcon()).isVisible();
         authPage.saveAuthState();
